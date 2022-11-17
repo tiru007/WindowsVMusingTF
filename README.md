@@ -4,12 +4,12 @@
 Deploy azure windows virtual machine using terraform
  - using existing VNET
  - from existing image
- - using existing availability set
+ - Creating availability set and adding VM to it.
+ - updating VM after deployment.
 
 # Next version
 - Azure AD Domain Join
 - Diagnostics logs to storage account
-- updating VM after deployment.
 - other minor changes and adding tags.
 
 # Steps to run
