@@ -20,21 +20,17 @@ variable vmSize {
     description = "size of the vm"
 }
 
-variable "managedImageResourceGroupName" {
-    description = "name of the managedImageResourceGroup"
-}
+# variable "managedImageResourceGroupName" {
+#    description = "name of the managedImageResourceGroup"
+# }
 
-variable "existingAvailabilitySetName"{
+variable "AvailabilitySetName"{
     description = "name of existing AvailabilitySet"
 }
 
-variable "existingAvailabilitySetrg"{
-    description = "existingAvailabilitySet Resource Group"
-}
-
-variable "managedImageName" {
-    description = "name of the managedImage"
-}
+# variable "managedImageName" {
+#    description = "name of the managedImage"
+# }
 
 variable "vmname" {
     description = "name of the VM"
@@ -59,4 +55,8 @@ variable "username" {
 
 variable "password" {
    description = "Default password for admin account"
+}
+
+variable "fileUris" {
+   description = "fileUris for post processing"
 }

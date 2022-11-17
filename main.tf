@@ -22,14 +22,19 @@ provider "azurerm" {
 #   value = "/subscriptions/xxxxxx/resourceGroups/RG-EASTUS-SPT-PLATFORM/providers/Microsoft.Compute/images/AZLXDEVOPS01_Image"
 # }
 
-data "azurerm_availability_set" "example" {
-  name                = var.existingAvailabilitySetName
-  resource_group_name = var.existingAvailabilitySetNamerg
-}
-
 resource "azurerm_resource_group" "example" {
   name     = var.resource_group_name
   location = var.location
+}
+
+resource "azurerm_availability_set" "example" {
+  name                = var.AvailabilitySetName
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  tags = {
+    environment = "Production"
+  }
 }
 
 data "azurerm_virtual_network" "example" {
@@ -62,6 +67,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = var.vmname
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  availability_set_id = azurerm_availability_set.example.id
   size                = var.vmSize
   admin_username      = var.username
   admin_password      = var.password
@@ -84,4 +90,17 @@ resource "azurerm_windows_virtual_machine" "example" {
     sku       = "2016-Datacenter"
     version   = "latest"
   }
+}
+
+resource "null_resource" "example" {
+    provisioner "local-exec" {
+      command = <<EOT
+        fileUris = var.fileUris
+        powershell -ExecutionPolicy Unrestricted -File appinstall.ps1
+      EOT
+    interpreter = ["powershell", "-Command"]
+    }
+  depends_on = [
+    azurerm_linux_virtual_machine.example
+  ]
 }
