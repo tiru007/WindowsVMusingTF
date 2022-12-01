@@ -7,6 +7,8 @@ Deploy azure windows virtual machine using terraform
  - Creating availability set and adding VM to it.
  - updating VM after deployment.
  - Reading VM Password from AKV
+ - add a disk and initialising it, formatting it and assigning drive letter
+ - running post deployment scripts
 
 # Next version
 - Azure AD Domain Join
