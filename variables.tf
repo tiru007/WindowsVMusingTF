@@ -53,9 +53,9 @@ variable "username" {
   default     = "azureuser"
 }
 
-#variable "password" {
-#  description = "Default password for admin account"
-#}
+variable "password" {
+  description = "Default password for admin account"
+}
 
 # variable "fileUris" {
 #   description = "fileUris for post processing"
